@@ -123,4 +123,62 @@ class BinarySearchTree {
     }
     return this.left._findMin();
   }
+  heightOfBST(bst) {
+    let leftHeight = 0;
+    let rightHeight = 0;
+    if (!bst) {
+      return 0;
+    } else {
+      leftHeight = heightOfBST(bst.left);
+      rightHeight = heightOfBST(bst.right);
+      if (leftHeight > rightHeight) {
+        return leftHeight + 1;
+      } else {
+        return rightHeight + 1;
+      }
+    }
+  }
+  tree(t) {
+    if (!t) {
+      return 0;
+    }
+    return tree(t.left) + t.value + tree(t.right);
+  }
+  compareTrees(arr1, arr2) {
+    for (let i = 0; i < arr1; i++) {
+      if (!arr2.includes(arr1[i])) return false;
+    }
+    if (arr1.length !== arr2.length) return false;
+    return true;
+  }
+  thirdLargest(str) {
+    let results = [];
+    let arr = str.split("_");
+    for (let i = 0; i < arr.length - 1; i++) {
+      results.push(arr[i]);
+    }
+    return results.sort()[results.length - 3];
+  }
+  balanced(bst) {
+    let leftHeight = heightOfBST(bst.left);
+    let rightHeight = heightOfBST(bst.right);
+
+    if (Math.abs(rightHeight - leftHeight) <= 1) {
+      return true;
+    } else if (Math.abs(rightHeight - leftHeight) > 1) {
+      return false;
+    }
+  }
+}
+
+function main() {
+  let BST = new BinarySearchTree();
+  BST.insert(3);
+  BST.insert(1);
+  BST.insert(4);
+  BST.insert(6);
+  BST.insert(9);
+  BST.insert(2);
+  BST.insert(5);
+  BST.insert(7);
 }
